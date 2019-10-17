@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.header-container {
+    padding: 1%;
+    text-align: center;
+    background-color: silver;
+}
+
+.navigation-container ul {
+    list-style: none;
+    display: flex;
+    padding: 1%;
+}
+
+.navigation-container ul li {
+    font-weight: bold;
+    padding-right: 5%;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: grey;
+}
+
+.image-container img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    flex-flow: 1;
+}
+
+.first-row,
+.second-row {
+    display: flex;
+    flex-direction: row;
+    padding: 3%;
+}
+
+.aside1,
+.aside2 {
+        flex: 1 1 30%;
+}
+
+.section1,
+.section2 {
+        flex: 1 1 70%;
+        padding-left: 5%;
+}
+
+.aside1 > p,
+.section1 > p, 
+.aside2 > p {
+        color: grey;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 1%;
+}
+
+.grid-item {
+    padding: 3%;
+}
+
+.footer-container {
+    display: flex;
+    background-color: silver;
+    width: 100%;
+    padding: 1%;
+    justify-content: space-evenly;
+}
+
+
+.column3 ul li ,
+.column4 ul li {
+    list-style: none;
+    padding-bottom: 10%;
+}
+
+.column3 a,
+.column4 a {
+    color: black;
+    text-decoration: none;
+}
+
+.column3 a:hover,
+.column4 a:hover {
+    color: white;
+}
+
+@media (max-width: 420px) {
+
+    header, img, figure, #content, footer{
+        width: 100%;
+    }
+
+    .navigation-container ul {
+        flex-direction: column;
+        padding-bottom: 2%;
+    }
+    .first-row {
+        display: flex;
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+    
+    .second-row {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    
+    .grid-item {
+        padding: 5%;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        justify-content: center;
+        padding: 5%;
+    }
+
+   .column3 ul li ,
+   .column4 ul li {
+    padding-bottom: 1%;
+}
+    
+}
