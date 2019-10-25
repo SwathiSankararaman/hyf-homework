@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css">
+    <title>Homework Form</title>
+</head>
+
+<body>
+
+    <form id="form1" method="post" action="success.html">
+        <div class="pc-tab">
+            <header>
+                <img src="images/FabIndia.jpg" alt="Logo">
+            </header>
+            Personal details<input checked="checked" id="tab1" type="radio" name="pct" />
+            Contact Me<input id="tab2" type="radio" name="pct" />
+            Shopping<input id="tab3" type="radio" name="pct" />
+            Payment<input id="tab4" type="radio" name="pct" />
+
+            <section>
+
+                <div class="tab1">
+                    <h1>Sign up to yourcustomtailor.com</h1>
+                    <p>We can't wait to help you improve your life-style and gain the attention from people<br>
+                        around you! <br>
+
+                        Sign up below to save up to 70% on apparel, hand-bags and cosmetics. Our agents are busy<br>
+                        picking the best offers that match your preferences and style. Every week we will send you a<br>
+                        hand-picked selection - we just need to know a few details about your first...
+                    </p>
+                    <h2>Step 1/4 - tell us who you are?</h2>
+                    <p>Nice to meet you. Let’s spend a minute to get to know each other? Please enter the following:</p>
+
+                    <div class="inputs">
+
+                        <label for="firstname">First name*</label>
+                        <input type="text" class="input-required" id="firstname" name="firstname" required>
+
+                        <label for="lastname">Last name*</label>
+                        <input type="text" class="input-required" id="lastname" name="lastname" required>
+
+                        <label for="country">Country*</label>
+                        <select id="country" name="country" required>
+                            <option value="denmark">Denmark</option>
+                            <option value="india">India</option>
+                            <option value="others">Others</option>
+                        </select><br><br>
+
+                        <label for="address">Street address*</label>
+                        <input type="text" class="input-required" id="address" name="address" required>
+
+                        <label for="zip">Post code*</label>
+                        <input type="text" class="input-required" id="zip" name="zip" pattern="[0-9]{4}" required
+                            placeholder="4 digit pincode">
+
+                        <label for="description">Profile description
+                            <p>Please provide a short
+                                description of yourself to be
+                                displayed on our social
+                                community pages.</p>
+                            <textarea name="profiledescription" id="description" cols="30" rows="10" maxlength="500"
+                                placeholder="Max 500 words"></textarea>
+                        </label>
+                        <p>Use the same address for billing and shipping? Uncheck below to fill out a separate shipping
+                            address.</p>
+
+                        <div class="checkboxvisibility">
+                            <input type="checkbox" class="input-checkbox" id="shippingaddress" name="shippingaddress"
+                                checked>
+                            <label for="shippingaddress">Shipping address</label>
+                            <ul>
+
+                                <li><label for="firstname">First name</label>
+                                    <input type="text" class="input-required" id="firstname" name="firstname">
+                                </li>
+
+                                <li><label for="lastname">Last name</label>
+                                    <input type="text" class="input-required" id="lastname" name="lastname">
+                                </li>
+
+                                <li><label for="country">Country</label>
+                                    <select id="country" name="country" required>
+                                        <option value="denmark">Denmark</option>
+                                        <option value="india">India</option>
+                                        <option value="others">Others</option>
+                                    </select></li><br><br>
+
+                                <li><label for="address">Street address</label>
+                                    <input type="text" class="input-required" id="address" name="address"></li>
+
+                                <li><label for="zip">Post code</label>
+                                    <input type="text" class="input-required" id="zip" name="zip" pattern="[0-9]{4}"
+                                        placeholder="4 digit pincode"></li>
+
+                                <li><label for="description">Profile description
+                                        <p>Please provide a short
+                                            description of yourself to be
+                                            displayed on our social
+                                            community pages.</p>
+                                        <textarea name="profiledescription" id="description" cols="30" rows="10"
+                                            maxlength="500" placeholder="Max 500 words"></textarea>
+                                    </label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="page1buttons">
+                        <label for="tab2" id="label2" class="navigation">Next step</label>
+                    </div>
+
+                </div>
+
+                <div class="tab2">
+                    <h1>Sign up to yourcustomtailor.com</h1>
+                    <h2>Step 2/4 - how can we reach you?</h2>
+                    <p>We will probably need to stay in touch somehow. Let us know how we can reach you?</p>
+
+                    <div class="inputs">
+
+                        <label for="email">Email*</label>
+                        <input type="email" class="input-required" id="email" name="email" required>
+
+                        <label for="phone">Phone</label>
+                        <input type="tel" class="input-notrequired" id="phone" name="phone" pattern="[0-9]{8}">
+
+                        <label for="password">Password*</label>
+                        <input type="password" class="input-required" id="password" name="password" minlength="10"
+                            title="Minimum 10 characters, uppercase and lowercase letters" required>
+
+                        <label for="passwordagain">Re-enter Password*</label>
+                        <input type="password" class="input-required" id="passwordagain" name="passwordagain"
+                            minlength="10" title="Minimum 10 characters, uppercase and lowercase letters" required>
+
+                        <p>I want to sign up for the newsletter</p>
+
+                        <label for="weeklynews">Weekly news</label>
+                        <input type="radio" id="weeklynews" name="news" value="Weekly" checked>
+                        <label for="monthlynews">Monthly news</label>
+                        <input type="radio" id="monthlynews" name="news" value="Monthly">
+                        <label for="nonews">Don't send me news</label>
+                        <input type="radio" id="nonews" name="news" value="nonews">
+
+                    </div>
+                    <div class="page2buttons">
+                        <label for="tab1" class="navigation">Back</label>
+                        <label for="tab3" id="label3" class="navigation">Next Step</label>
+                    </div>
+
+                </div>
+
+                <div class="tab3">
+                    <h1>Sign up to yourcustomtailor.com</h1>
+                    <h2>Step 3/4 - Time to learn about your preferences?</h2>
+                    <p>What kind of items are you interested in offers on?</p>
+                    <div class="inputs">
+                        <label for="apparal">Apparal</label>
+                        <input type="checkbox" class="input-checkbox" id="Apparal" name="Apparal">
+                        <label for="accessories">Accessories</label>
+                        <input type="checkbox" class="input-checkbox" id="accessories" name="accessories">
+                        <label for="handbags">Handbags</label>
+                        <input type="checkbox" class="input-checkbox" id="handbags" name="handbags">
+                        <label for="jewelry">Jewelry</label>
+                        <input type="checkbox" class="input-checkbox" id="jewelry" name="jewelry">
+                        <label for="shoes">Shoes</label>
+                        <input type="checkbox" class="input-checkbox" id="shoes" name="shoes"><br><br><br>
+                        <p>Choose the images that best resemble your style</p>
+                        <div class="imagecontainer">
+                            <div>
+                                <img src="images/Handbag1.jpg" alt="brown bag">
+                                <label for="handbags1">Brown Bag</label>
+                                <input type="checkbox" class="input-checkbox" id="handbags1" name="handbags">
+                            </div>
+                            <div>
+                                <img src="images/Handbag2.jpg" alt="sling bag">
+                                <label for="handbags2">Sling Bag</label>
+                                <input type="checkbox" class="input-checkbox" id="handbags2" name="handbags">
+                            </div>
+                            <div>
+                                <img src="images/Backpack1.jpg" alt="blue bag">
+                                <label for="backpack1">Blue Bag</label>
+                                <input type="checkbox" class="input-checkbox" id="backpack1" name="backpack">
+                            </div>
+                            <div>
+                                <img src="images/Backpack2.jpg" alt="green bag">
+                                <label for="backpack2">Olive green Bag</label>
+                                <input type="checkbox" class="input-checkbox" id="backpack2" name="backpack">
+                            </div>
+                            <div>
+                                <img src="images/Accessories1.jpg" alt="black glass">
+                                <label for="accessories1">Black Round glasses</label>
+                                <input type="checkbox" class="input-checkbox" id="accessories1" name="accessories">
+                            </div>
+                            <div>
+                                <img src="images/Accessories2.jpg" alt="pink glass">
+                                <label for="accessories2">Pink glasses</label>
+                                <input type="checkbox" class="input-checkbox" id="accessories2" name="accessories">
+                            </div>
+                            <div>
+                                <img src="images/Accessories3.jpg" alt="sharp glass">
+                                <label for="accessories3">Round sharp edge glasses</label>
+                                <input type="checkbox" class="input-checkbox" id="accessories3" name="accessories">
+                            </div>
+                            <div>
+                                <img src="images/Footwear1.jpg" alt="grey">
+                                <label for="footwear1">Grey Slippers</label>
+                                <input type="checkbox" class="input-checkbox" id="footwear1" name="footwear">
+                            </div>
+                            <div>
+                                <img src="images/Footwear2.jpg" alt="brown">
+                                <label for="footwear2">Brown shoes</label>
+                                <input type="checkbox" class="input-checkbox" id="footwear2" name="footwear">
+                            </div>
+                            <div>
+                                <img src="images/Footwear3.jpg" alt="red">
+                                <label for="footwear3">Red shoes</label>
+                                <input type="checkbox" class="input-checkbox" id="footwear3" name="footwear">
+                            </div>
+                            <div>
+                                <img src="images/Jwellery1.jpg" alt="red">
+                                <label for="jwellery1">Pearl Earings</label>
+                                <input type="checkbox" class="input-checkbox" id="jwellery1" name="jwellery">
+                            </div>
+                            <div>
+                                <img src="images/Jwellery2.jpg" alt="red">
+                                <label for="jwellery2">Ruby set</label>
+                                <input type="checkbox" class="input-checkbox" id="jwellery2" name="jwellery">
+                            </div>
+                            <div>
+                                <img src="images/Jwellery3.jpg" alt="red">
+                                <label for="jwellery3">Diamond ring</label>
+                                <input type="checkbox" class="input-checkbox" id="jwellery3" name="jwellery">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="page3buttons">
+                        <label for="tab2" class="navigation">Back</label>
+                        <label for="tab4" id="label4" class="navigation">Next Step</label>
+                    </div>
+                </div>
+
+                <div class="tab4">
+                    <h1>Sign up to yourcustomtailor.com</h1>
+                    <h2>Step 4/4 - Payment</h2>
+                    <p>Please fill in your payment data</p>
+                    <div class="inputs">
+                        <label for="cardname">Name on card*</label>
+                        <input type="text" class="input-required" id="cardname" name="cardname" required
+                            placeholder="Name as in the card">
+
+                        <label for="cardtype">Card type*</label>
+                        <select id="cardtype" name="cardtype" required>
+                            <option value="Mastercard">Master Card</option>
+                            <option value="Visa">VISA</option>
+                            <option value="Dankort">Dankort</option>
+                        </select><br><br>
+
+                        <label for="cardnumber">Credit card number*</label>
+                        <input type="number" class="input-notrequired" id="cardnumber" name="cardnumber"
+                            pattern="[0-9]{16}" required placeholder="Enter 16 digit number">
+
+                        <label for="expirymonth">Expiry month*</label>
+                        <input type="month" class="input-notrequired" id="expirymonth" name="expirymonth" required>
+
+                        <label for="expiryyear">Expiry year*</label>
+                        <input type="year" class="input-notrequired" id="expiryyear" name="expiryyear" required>
+
+                        <label for="secretnumber">CCV*</label>
+                        <input type="number" class="input-notrequired" id="secretnumber" name="secretnumber"
+                            pattern="[0-9]{3}" required placeholder="Enter 3 digit number">
+
+                    </div>
+                    <div class="page4buttons">
+                        <label for="tab3" class="navigation">Back</label>
+                        <input type="submit" id="submit">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </form>
+    <script src="main.js"></script>
+
+</body>
+
+</html>

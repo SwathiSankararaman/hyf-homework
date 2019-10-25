@@ -1,0 +1,185 @@
+Component Needs
+
+.checkboxvisibility {
+    border: none;
+}
+
+textarea {
+    width: 100%;
+}
+
+.page1buttons, .page2buttons, .page3buttons, .page4buttons {
+    border: none;
+}
+
+#submit {
+    display: block;
+    padding: 5px;
+    width: 20%;
+    margin-left: 250px;
+    border-bottom: 0;
+    cursor : pointer;
+    background-color: rgb(138, 6, 6);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+#submit:hover {
+    background-color: goldenrod;
+    color: black;
+    border: 1px solid black;
+}
+
+
+input[type=checkbox]:checked ~ ul {
+    display: none;
+}
+
+input[type=radio], input[type=checkbox] {
+    display: inline;
+    margin-right: 20px;
+}
+
+.imagecontainer {
+  display: grid;
+  grid-template-columns: 135px 135px 135px 135px;
+  grid-gap: 10px;
+  border: none;
+}
+
+.imagecontainer img {
+    height: 100px;
+    width: 100px;
+}
+
+header img {
+    text-align: center;
+    height: 250px;
+    width: 100%;
+}
+
+
+.pc-tab>input,
+.pc-tab section>div {
+    display: none
+}
+
+#tab1:checked~section .tab1,
+#tab2:checked~section .tab2,
+#tab3:checked~section .tab3,
+#tab4:checked~section .tab4 {
+    display: block;
+}
+
+#tab1, #tab2, #tab3, #tab4{
+    display: inline-block;
+}
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background: #ecf0f1;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 100;
+    font-size: 60px;
+    color: #e74c3c;
+}
+
+
+.pc-tab {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.pc-tab ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pc-tab label.navigation {
+    display: block;
+    padding: 15px;
+    width: 20%;
+    margin-left: 250px;
+    border-bottom: 0;
+    cursor : pointer;
+    background-color: rgb(138, 6, 6);
+    border: 1px solid #ddd;
+    text-align: center;
+    color: white;
+}
+
+input {
+    margin: 10px 0px 10px 0px;
+    padding: 2px;
+    display: block;
+}
+
+#tab1:checked ~ nav .tab1 label,
+#tab2:checked ~ nav .tab2 label ,
+#tab3:checked ~ nav .tab3 label , 
+#tab4:checked ~ nav .tab4 label {
+    background: #fff;
+    position: relative;
+}
+
+#tab1:checked ~ nav .tab1 label:after,
+#tab2:checked ~ nav .tab2 label:after,
+#tab3:checked ~ nav .tab3 label:after,
+#tab4:checked ~ nav .tab4 label:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    left: 0;
+    bottom: -1px;
+}
+
+section div {
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+section div h2 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+button {
+    background: none;
+    border: 1px solid #000;
+    border-radius: 2px;
+}
+
+@media only screen and (max-width: 600px) {
+    
+    .pc-tab ul {
+        flex-direction: column;
+    }
+    .pc-tab li {
+        width: 100%;
+     }
+    label:after {
+        height : 0px !important;
+    }
+  }
