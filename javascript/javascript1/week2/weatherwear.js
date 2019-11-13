@@ -4,7 +4,7 @@ function clothesToWear(temperature) {
     if (temperature >= 25) {
         console.log("Enjoy with T-shirts, shorts with a pair of Flip-flops!!");
     }
-    else if (temperature >= 10 && temperature < 25 ) {
+    else if (temperature >= 18 && temperature < 25 ) {
         console.log("Wear Full hand shirts with pants!!");
     } else if (temperature >= 10 && temperature < 18) {
         console.log("Wear a Thermo along with the jacket, pants and Shoes!!");
