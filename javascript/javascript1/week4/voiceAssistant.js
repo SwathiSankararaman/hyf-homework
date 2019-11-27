@@ -45,7 +45,7 @@ function getReply(command) {
         }
 
         // Question 7 (What day is it today?)
-        if (splitCommand.includes('day') && ((splitCommand.includes('today?') || splitCommand.includes('today?')))) {
+        if (splitCommand.includes('day') && ((splitCommand.includes('today') || splitCommand.includes('today?')))) {
             let day = new Date();
             let year = day.getFullYear();
             let date = day.getDate();
