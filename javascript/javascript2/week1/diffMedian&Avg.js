@@ -1,6 +1,6 @@
 
 let housePrices = [3000000, 3500000, 1300000, 40000000, 100000000, 8000000, 2100000];
-housePrices = housePrices.sort();
+housePrices = housePrices.sort(function(a, b){return a-b});
 
 
 // Make a function that takes an array as parameter and returns the average of that parameter
