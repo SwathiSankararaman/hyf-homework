@@ -44,11 +44,11 @@ function renderProducts(products) {
 
 
 // Searching for products
-let filteredProducts = products;
+let sortedProducts = products;
 function filter() {
     let value = document.getElementById('input').value;
-    filteredProducts = products.filter(prod => prod.name.toLowerCase() === value);
-    renderProducts(filteredProducts);
+    sortedProducts = sortedProducts.filter(prod => prod.name.toLowerCase() === value);
+    renderProducts(sortedProducts);
 }
 
 document.getElementById('mybutton').addEventListener('click', filter);
@@ -57,27 +57,34 @@ document.getElementById('mybutton').addEventListener('click', filter);
 function filterBasedOnShipping() {
     let country = document.querySelector('.country select');
     country = country.options[country.selectedIndex].text;
-    let filtered = filteredProducts.filter(prod => prod.shipsTo.includes(country));
-    renderProducts(filtered);
+    if (country === 'Please select an option') {
+        sortedProducts = products;
+        sorting();
+    } else {
+         sortedProducts = sortedProducts.filter(prod => prod.shipsTo.includes(country));
+         renderProducts(sortedProducts);
+    }
+   
 }
 
-//let sortedProducts = products;
-// function sorting() {
-//     let option = document.querySelector('.sort select').value;
-//     console.log(option);
-    
-    
-//     if (option === 'cheap') {
+// Sort the products - optional
+function sorting() {
+    let option = document.querySelector('.sort select').value;
+    if (option === 'cheap') {
+        sortedProducts.sort((a, b) => a.price - b.price);
+    } else if (option === 'expensive') {
+        sortedProducts.sort((a, b) => b.price - a.price);
+    } else if (option === 'name') {
+        sortedProducts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+    } else if (option === 'novalue') {
+        console.log('Hi');
+        console.log(products);
         
-//     } else if (option === 'expensive'){
-
-//     } else if (option === 'name') {
-        
-//     }
-//renderProducts(sortedProducts);
-// }
+        sortedProducts = products;
+    }
+    renderProducts(sortedProducts);
+}
 
 renderProducts(products);
-//document.querySelector('.country select').addEventListener('onchange', filterBasedOnShipping);
 
 
