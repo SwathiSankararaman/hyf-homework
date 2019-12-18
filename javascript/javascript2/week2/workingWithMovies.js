@@ -47,7 +47,11 @@ console.log(`The total number of movies are ${keyWords.length}`);
 // Create an array of movies where a word in the title is duplicated. 
 // Fx "Star Wars: The Clone Wars" the word Wars is duplicated
 
-let titleDuplicatedMovies = movies.filter(mov =>  new Set(mov.title.split(" ")).size != mov.title.length);
+let titleDuplicatedMovies = movies.filter(mov =>  {
+   let splitTitle = mov.title.split(" ");
+   return new Set(splitTitle).size != splitTitle.length;
+
+});
 console.log(titleDuplicatedMovies);
 
 // Find the word that is mostly duplicated using sort Optional
