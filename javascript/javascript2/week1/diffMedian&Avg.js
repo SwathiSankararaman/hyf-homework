@@ -1,29 +1,30 @@
 
 let housePrices = [3000000, 3500000, 1300000, 40000000, 100000000, 8000000, 2100000];
-housePrices = housePrices.sort(function(a, b){return a-b});
+let lengthOfHousePrices = housePrices.length;
+housePrices = housePrices.sort(function (a, b) { return a - b });
 
 
 // Make a function that takes an array as parameter and returns the average of that parameter
 
-function average(housePrices) {
+function calculateAverage(housePrices) {
     let sum = 0;
-    for (let i = 0; i < housePrices.length; i++) { // Iterating through the array and calculating the sum
+    for (let i = 0; i < lengthOfHousePrices; i++) { // Iterating through the array and calculating the sum
         sum = sum + housePrices[i];
     }
-    let average = sum / housePrices.length; // average = sum of all elements/no of elements
+    let average = sum / lengthOfHousePrices; // average = sum of all elements/no of elements
     return Math.round(average);
 }
 
 // Make a function that takes an array as parameter and returns the median of that parameter
 
-function median(housePrices) {
-    let arrayLength = housePrices.length;
-    if (arrayLength % 2 === 0) { // If the array length is even we have to do the average of middle 2 values
-        let median = housePrices[arrayLength / 2] + housePrices[arrayLength / 2 - 1];
+function calculateMedian(housePrices) {
+    let halfLengthOfHousePrices = lengthOfHousePrices / 2;
+    if (lengthOfHousePrices % 2 === 0) { // If the array length is even we have to do the average of middle 2 values
+        let median = (housePrices[halfLengthOfHousePrices] + housePrices[halfLengthOfHousePrices - 1])/2;
         return Math.round(median);
 
     } else { // If the array length is odd we have to take the middle element
-        let median = housePrices[(arrayLength - 1) / 2]; // (7-1)/2 = 6/2 = 3 will be middle element since index starts with 0
+        let median = housePrices[(lengthOfHousePrices - 1) / 2]; // (7-1)/2 = 6/2 = 3 will be middle element since index starts with 0
         return Math.round(median);
     }
 
@@ -31,39 +32,25 @@ function median(housePrices) {
 
 // Now create a function that calculates the median and the average and returns these two value in an object.
 
-function avgAndMedian(housePrices) {
-    let sum = 0;
-    let arrayLength = housePrices.length;
-    let median = 0;
-    for (let i = 0; i < arrayLength; i++) {
-        sum = sum + housePrices[i];
-    }
-    let average = sum / arrayLength;
-    average = Math.round(average);
-    if (arrayLength % 2 === 0) {
-        median = housePrices[arrayLength / 2] + housePrices[arrayLength / 2 - 1];
-        median = Math.round(median);
+function calculateAvgAndMedian(housePrices) {
+    let averageObject = calculateAverage(housePrices);
+    let medianObject = calculateMedian(housePrices);
 
-    } else {
-        median = housePrices[(arrayLength - 1) / 2];
-        median = Math.round(median);
-    }
-
-    return { 'average': average, 'median': median }; // Returning both median and average as an object
+    return { 'average': averageObject, 'median': medianObject }; // Returning both median and average as an object
 
 }
 
-let resultOfAverage = average(housePrices);
+let resultOfAverage = calculateAverage(housePrices);
 console.log(resultOfAverage);
 
-let resultOfMedian = median(housePrices);
+let resultOfMedian = calculateMedian(housePrices);
 console.log(resultOfMedian);
 
 
-let object = avgAndMedian(housePrices);
+let object = calculateAvgAndMedian(housePrices);
 console.log(object);
 
-let result = document.getElementById('result'); 
+let result = document.getElementById('result');
 let heading1 = document.createElement('h1');
 let para1 = document.createElement('p');
 let para2 = document.createElement('p');

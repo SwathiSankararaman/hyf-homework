@@ -1,32 +1,8 @@
 let spiritAnimalArray = ['Wolf', 'Butterfly', 'Swan', 'Tiger', 'Turtle', 'Rabbit', 'Peacock', 'Panda', 'Dolphin', 'Raven'];
 let arrayLength = spiritAnimalArray.length;
 
-// // When user selects Clicking the button this function should be executed
-function buttonClick() {
-    if (document.getElementById('generateOptions').value === 'button') {
-        commonFunctionality();
-    }
-}
-
-// // When user selects Hovering over name this function should be executed
-function inputHover() {
-    if (document.getElementById('generateOptions').value === 'hovering') {
-        commonFunctionality();
-    }
-}
-
-// // When user selects while entering the name this function should be executed
-function inputTyping() {
-    if (document.getElementById('generateOptions').value === 'typing') {
-        commonFunctionality();
-    }
-
-}
-
-// Event listeners for three types of events
-document.getElementById('mybutton').addEventListener('click',buttonClick);
-document.getElementById('name').addEventListener('mouseover',inputHover);
-document.getElementById('name').addEventListener('input',inputTyping);
+document.getElementById('mybutton').addEventListener('click', commonFunctionality);
+document.getElementById('generateOptions').addEventListener('change', dropDownChange);
 
 
 
@@ -40,5 +16,22 @@ function commonFunctionality() {
         let result = document.getElementById('namedisplay');
         result.innerText = `${value} - The ${spiritAnimalArray[index]}`;
 
+    }
+}
+
+function dropDownChange() {
+
+    document.getElementById('mybutton').removeEventListener('click', commonFunctionality);
+    document.getElementById('name').removeEventListener('mouseover', commonFunctionality);
+    document.getElementById('name').removeEventListener('input', commonFunctionality);
+
+    if (document.getElementById('generateOptions').value === 'button') {
+        document.getElementById('mybutton').addEventListener('click', commonFunctionality);
+
+    } else if (document.getElementById('generateOptions').value === 'hovering') {
+        document.getElementById('name').addEventListener('mouseover', commonFunctionality);
+
+    } else {
+        document.getElementById('name').addEventListener('input', commonFunctionality);
     }
 }
