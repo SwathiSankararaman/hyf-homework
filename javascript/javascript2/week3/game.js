@@ -42,15 +42,15 @@ function getInputValue() {
                 if (leftLabel.innerHTML > rightLabel.innerHTML) {    
                     lWinMessage.innerHTML = `Congrats,You won!`;
                     rWinMessage.innerHTML = `Sorry,You lost!`;
-                    // let confettiSettings = { target: 'left' };
-                    // let confetti = new ConfettiGenerator(confettiSettings);
-                    // confetti.render();
+                    let confettiSettings = { target: 'left' };
+                    let confetti = new ConfettiGenerator(confettiSettings);
+                    confetti.render();
                 } else if (leftLabel.innerHTML < rightLabel.innerHTML) {
                     rWinMessage.innerHTML = `Congrats,You won!`;
                     lWinMessage.innerHTML = `Sorry,You lost!`;
-                    // let confettiSettings = { target: 'right' };
-                    // let confetti = new ConfettiGenerator(confettiSettings);
-                    // confetti.render();
+                    let confettiSettings = { target: 'right' };
+                    let confetti = new ConfettiGenerator(confettiSettings);
+                    confetti.render();
                 } else {
                     lWinMessage.innerHTML = `Awww!!It was close. Game Draw!`;
                     rWinMessage.innerHTML = `Awww!!It was close. Game Draw!`;
