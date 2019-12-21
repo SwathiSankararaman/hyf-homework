@@ -34,14 +34,14 @@ console.log(moviesWithTag);
 // Using chaining, first filter the movies array to only contain the movies rated higher than 6. 
 //Now map the movies array to only the rating of the movies.
 
-const highRating = movies.filter(mov => (mov.rating) > 6).map(mov => mov.rating);
+const highRating = movies.filter(mov => mov.rating > 6).map(mov => mov.rating);
 console.log(highRating);
 
 // Count the total number of movies containing any of following keywords: Surfer, Alien or Benjamin. 
 // So if there were 3 movies that contained Surfer, 1 with Alien and 2 with Benjamin, you would return 6. 
 // Can you make sure the search is case insensitive?
 
-const keyWords = movies.filter(mov => (mov.title.toLowerCase().includes("surfer") || mov.title.toLowerCase().includes("alien") || mov.title.toLowerCase().includes("benjamin")));
+const keyWords = movies.filter(mov => mov.title.toLowerCase().includes("surfer") || mov.title.toLowerCase().includes("alien") || mov.title.toLowerCase().includes("benjamin"));
 console.log(`The total number of movies are ${keyWords.length}`);
 
 // Create an array of movies where a word in the title is duplicated. 
