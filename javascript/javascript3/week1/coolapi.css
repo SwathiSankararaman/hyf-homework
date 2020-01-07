@@ -1,0 +1,20 @@
+#container {
+ text-align: center;
+}
+h1 {
+  margin-bottom: 20%;
+ }
+
+#currcode {
+  margin-bottom: 5%;
+ }
+
+#mybutton {
+  background-color: chocolate;
+  padding: 3%;
+ }
+
+ p {
+  text-align: left;
+  padding: 2%;
+ }

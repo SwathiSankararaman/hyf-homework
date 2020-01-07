@@ -1,0 +1,38 @@
+[
+    {
+        "movieName": "96",
+        "songName": "Kadhalae",
+        "releasedDate": 2018,
+        "musicDirector": "Govind vasantha",
+        "Singers": "Chinmayi"
+    },
+    {
+        "movieName": "Vinnaithandi Varuvaya",
+        "songName": "Anbil avan",
+        "releasedDate": 2014,
+        "musicDirector": "A R Rahman",
+        "Singers": "Devan Ekambaram"
+    },
+    {
+        "movieName": "VIP",
+        "songName": "Amma amma",
+        "releasedDate": 2015,
+        "musicDirector": "Anirudh",
+        "Singers": "Dhanush"
+    },
+    {
+        "movieName": "Hey Ram",
+        "songName": "Ne partha paarvai",
+        "releasedDate": 2003,
+        "musicDirector": "Ilaiyaraja",
+        "Singers": "Latha Mangeshkar"
+    },
+    {
+        "movieName": "Ayayao Anandhamae",
+        "songName": "Kumki",
+        "releasedDate": 2010,
+        "musicDirector": "D Iman",
+        "Singers": "Haricharan"
+    }
+
+]
