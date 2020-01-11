@@ -1,5 +1,5 @@
 
-let button = document.getElementById('mybutton');
+const button = document.getElementById('mybutton');
 button.addEventListener('click', fetchGif);
 
 function fetchGif() {
@@ -11,7 +11,7 @@ function fetchGif() {
         alert("Please enter the type of GIF");
     } else {
         fetch(`https://api.giphy.com/v1/gifs/search?api_key=OKovy8ivHuB7o9yBxUn8kgfYQEB4Nr0t&q=${gif}&limit=${Number}&offset=0&rating=G&lang=en`)
-            .then(Response => Response.json())
+            .then(response => response.json())
             .then(data => {
                 console.log(data);
                 organizeData(data);
@@ -26,8 +26,8 @@ function organizeData(data) {
         imageContainer.removeChild(imageContainer.firstChild);
     }
     data.data.forEach(item => {
-        let div = document.createElement('div');
-        let img = document.createElement('img');
+        const div = document.createElement('div');
+        const img = document.createElement('img');
         img.src = item.images.preview_gif.url;
         imageContainer.appendChild(div);
         div.appendChild(img);
