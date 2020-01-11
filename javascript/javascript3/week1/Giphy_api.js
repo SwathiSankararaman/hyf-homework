@@ -3,10 +3,10 @@ let button = document.getElementById('mybutton');
 button.addEventListener('click', fetchGif);
 
 function fetchGif() {
-    let gifType = document.getElementById('giftype');
-    let gif = gifType.value;
-    let noOfGifs = document.getElementById('gifnum');
-    let Number = noOfGifs.value;
+    const gifType = document.getElementById('giftype');
+    const gif = gifType.value;
+    const noOfGifs = document.getElementById('gifnum');
+    const number = noOfGifs.value;
     if (!gif) {
         alert("Please enter the type of GIF");
     } else {
@@ -14,21 +14,18 @@ function fetchGif() {
             .then(Response => Response.json())
             .then(data => {
                 console.log(data);
-
                 organizeData(data);
-
             })
     }
-
 }
 
 function organizeData(data) {
-    let imageContainer = document.getElementById('flex-container');
+    const imageContainer = document.getElementById('flex-container');
     // To clear the gifs obtained from the previous search
     while (imageContainer.firstChild) {
         imageContainer.removeChild(imageContainer.firstChild);
     }
-    data.data.map(item => {
+    data.data.forEach(item => {
         let div = document.createElement('div');
         let img = document.createElement('img');
         img.src = item.images.preview_gif.url;
