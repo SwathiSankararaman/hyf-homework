@@ -10,7 +10,7 @@ function fetchGif() {
     if (!gif) {
         alert("Please enter the type of GIF");
     } else {
-        fetch(`https://api.giphy.com/v1/gifs/search?api_key=OKovy8ivHuB7o9yBxUn8kgfYQEB4Nr0t&q=${gif}&limit=${Number}&offset=0&rating=G&lang=en`)
+        fetch(`https://api.giphy.com/v1/gifs/search?api_key=OKovy8ivHuB7o9yBxUn8kgfYQEB4Nr0t&q=${gif}&limit=${number}&offset=0&rating=G&lang=en`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
