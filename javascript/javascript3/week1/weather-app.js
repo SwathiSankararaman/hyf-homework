@@ -72,27 +72,27 @@ function organizeData(data) {
 
 function renderHtml(organizedDataObject) {
 
-    let city = document.querySelector('#grid-container .grid-item1 > label');
+    const city = document.querySelector('#grid-container .grid-item1 > label');
     city.innerHTML = organizedDataObject.city;
-    let temp = document.querySelector('#grid-container .grid-item2 > label');
+    const temp = document.querySelector('#grid-container .grid-item2 > label');
     temp.innerHTML = `${organizedDataObject.temperature}°C`;
-    let image = document.querySelector('#grid-container .grid-item3 > img');
+    const image = document.querySelector('#grid-container .grid-item3 > img');
     image.src = organizedDataObject.weathericon;
-    let windSpeed = document.querySelector('#grid-container .grid-item4 > label');
+    const windSpeed = document.querySelector('#grid-container .grid-item4 > label');
     windSpeed.innerHTML = organizedDataObject.windspeed;
-    let cloudStaus = document.querySelector('#grid-container .grid-item5 > label');
+    const cloudStaus = document.querySelector('#grid-container .grid-item5 > label');
     cloudStaus.innerHTML = organizedDataObject.cloudStaus;
-    let sunrise = document.querySelector('#grid-container .grid-item6 > label');
+    const sunrise = document.querySelector('#grid-container .grid-item6 > label');
     sunrise.innerHTML = organizedDataObject.sunrise;
-    let sunset = document.querySelector('#grid-container .grid-item7 > label');
+    const sunset = document.querySelector('#grid-container .grid-item7 > label');
     sunset.innerHTML = organizedDataObject.sunset;
-    let locationObject = {
+    const locationObject = {
         'lat': organizedDataObject.coordinates.lat,
         'lng': organizedDataObject.coordinates.lon
     }
-    let map = new google.maps.Map(
+    const map = new google.maps.Map(
         document.getElementById('map'), { zoom: 14, center: locationObject });
-    let marker = new google.maps.Marker({ position: locationObject, map: map });
+    const marker = new google.maps.Marker({ position: locationObject, map: map });
 
 }
 
