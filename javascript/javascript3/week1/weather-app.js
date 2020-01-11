@@ -1,21 +1,22 @@
 const API_KEY = 'd9aea0850eeef3769c679a50817a311c';
 const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?';
-let button1 = document.getElementById('mybutton1');
+const button1 = document.getElementById('mybutton1');
 button1.addEventListener('click', fetchCityName);
 
-let button2 = document.getElementById('mybutton2');
+const button2 = document.getElementById('mybutton2');
 button2.addEventListener('click', fetchPosition);
 
+const cityName = document.getElementById('inputtext');
+const city = cityName.value;
+
 function fetchCityName() {
-    let cityName = document.getElementById('inputtext');
-    let city = cityName.value;
     if (!city) {
         alert("Please enter a city to get the weather details");
     } else {
         let loadingLabel = document.getElementById("hiddentext");
         loadingLabel.hidden = false;
         fetch(`${weatherUrl}q=${city}&appid=${apiKey}`)
-            .then(Response => Response.json())
+            .then(response => response.json())
             .then(data => {
                 loadingLabel.hidden = true;
                 localStorage.setItem('savedCity', city);
@@ -29,7 +30,7 @@ function fetchCityName() {
 function fetchLocation(lat, lon) {
 
     fetch(`${weatherUrl}lat=${lat}&lon=${lon}&appid=${apiKey}`)
-        .then(Response => Response.json())
+        .then(response => response.json())
         .then(data => {
             let loadingLabel = document.getElementById("hiddentext");
             loadingLabel.hidden = true;
