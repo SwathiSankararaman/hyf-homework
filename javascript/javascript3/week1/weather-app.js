@@ -99,15 +99,10 @@ function renderHtml(organizedDataObject) {
 
 
 function fetchPosition() {
-    let lat = 0;
-    let lon = 0;
     let hidden = document.getElementById("hiddentext");
     hidden.hidden = false;
     navigator.geolocation.getCurrentPosition(position => {
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-        fetchLocation(lat, lon);
-
+        fetchLocation(position.coords.latitude, position.coords.longitude);
     })
 
 }
