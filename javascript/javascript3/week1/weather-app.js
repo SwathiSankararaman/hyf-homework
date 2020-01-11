@@ -1,4 +1,4 @@
-const apiKey = 'd9aea0850eeef3769c679a50817a311c';
+const API_KEY = 'd9aea0850eeef3769c679a50817a311c';
 const weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?';
 let button1 = document.getElementById('mybutton1');
 button1.addEventListener('click', fetchCityName);
