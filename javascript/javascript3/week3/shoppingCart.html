@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="shoppingCart.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='container'>
+        <label for="search"> Search for an item: </label>
+         <input type="search" id="mySearch" name="search" autocomplete="on" list="items"><br><br>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p class="modal-text"></p>
+            </div>     
+          </div>
+        <datalist id="items"></datalist>
+        <button id="mybutton" type="submit">Search</button>
+    </div>
+    <script type="text/javascript" src="shoppingCart.js"></script>
+</body>
+
+</html>
