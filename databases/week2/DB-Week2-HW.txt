@@ -1,0 +1,147 @@
+Part 1: Working with tasks
+
+Add a task with these attributes: title, description, created, updated, due_date, status_id, user_id
+
+insert into task (title, description, created, updated, due_date, status_id, user_id) values ('Homework', 'DB Week2 HW', '2020-02-03 21:01:16', '2020-02-03 23:01:16', null, 2, 8);
+
+
+Change the title of a task
+
+UPDATE task 
+SET title = 'Put clothes in Washing Machine' 
+WHERE id = 1;
+
+Change a task due date
+
+UPDATE task 
+SET due_date = '2020-02-13 18:00:00' 
+WHERE id = 5;
+
+Change a task status
+
+UPDATE task 
+SET status_id = 1 
+WHERE id = 36;
+
+Mark a task as complete
+
+UPDATE task 
+SET status_id = 3 
+WHERE id = 36;
+
+Delete a task
+
+DELETE from task
+WHERE id = 36;
+
+
+Part 2: School database
+
+SET NAMES utf8mb4;
+
+CREATE TABLE `class` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `begins` DATETIME NOT NULL,
+  `ends` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `student` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NULL,
+  `class_id` int(10) unsigned NOT NULL,
+   PRIMARY KEY (`id`),
+   CONSTRAINT `fk_class` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+-- class data
+insert into class (id, name, begins, ends) values (1, 'Class01', '2019-10-01 00:00:00', '2020-05-31 23:59:00');
+insert into class (id, name, begins, ends) values (2, 'Class02', '2019-12-01 00:00:00', '2020-07-01 23:59:00');
+insert into class (id, name, begins, ends) values (3, 'Class03', '2020-02-01 00:00:00', '2020-09-01 23:59:00');
+
+-- student data
+insert into student (id, name, email, phone, class_id) values (1, 'Swathi Sankararaman', 'swathi@hackyourfuture.cph', NULL, 1);
+insert into student (id, name, email, phone, class_id) values (2, 'Luciana Caruso', 'lucha@hackyourfuture.cph', '12345678', 1);
+insert into student (id, name, email, phone, class_id) values (3, 'Magdalena Wojtakowska', 'magda@hackyourfuture.cph', '21345678', 2);
+insert into student (id, name, email, phone, class_id) values (4, 'Bengu Mochi', 'bengu@hackyourfuture.cph', '12345687', 3);
+insert into student (id, name, email, phone, class_id) values (5, 'Mekdes Habtamu', 'mekdes@hackyourfuture.cph', NULL, 3);
+insert into student (id, name, email, phone, class_id) values (6, 'Afrouz Hakimzadeh', 'afrouz@hackyourfuture.cph', '12354678', 3);
+
+
+Create an index on the name column of the student table.
+CREATE INDEX idx_name ON student (name);
+
+Add a new column to the class table named status which can only have the following values: not-started, ongoing, finished (hint: enumerations).
+ALTER TABLE class ADD status enum('not-started','ongoing', 'finished') NOT NULL;
+
+Part 3: More queries
+
+Get all the tasks assigned to users whose email ends in @spotify.com
+
+SELECT task.id AS Task_Id, task.title AS Task_Title, task.description as Task_Description, user.email FROM user
+INNER JOIN user_task ON user.id = user_task.user_id
+INNER JOIN task ON task.id = user_task.task_id
+WHERE user.email LIKE '%@spotify.com';
+
+Get all the tasks for 'Donald Duck' with status 'Not started'
+
+SELECT user.id AS User_Id, user.name AS User_Name, task.id AS Task_Id, task.title AS Task_Title, 
+status.id AS Status_Id, status.name AS Status_Name FROM user 
+INNER JOIN user_task ON user.id = user_task.user_id
+INNER JOIN task ON task.id = user_task.task_id
+INNER JOIN status ON task.status_id = status.id
+WHERE user.name LIKE 'Donald Duck%' AND status.name = 'Not started';
+
+Get all the tasks for 'Maryrose Meadows' that were created in september (hint: month(created)=month_number)
+
+SELECT user.id AS User_Id, user.name AS User_Name, task.id AS Task_Id, task.title AS Task_Title,
+task.created AS Task_Created_Date FROM user 
+INNER JOIN user_task ON user.id = user_task.user_id
+INNER JOIN task ON task.id = user_task.task_id
+WHERE user.name LIKE '%Maryrose meadows%' AND month(created) = 09;
+
+Find how many tasks where created in each month, e.g. how many tasks were created in october, how many tasks were created in november, etc. (hint: use group by)
+
+SELECT MONTH(created) AS Month, count(task.id) AS Count_Of_Tasks FROM task
+GROUP BY month(created);
+
+Part 4: Meal application
+
+SET NAMES utf8mb4;
+
+CREATE TABLE `meal` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NULL DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
+  `when` DATETIME NOT NULL,
+  `max_reservations` int(10) unsigned NOT NULL,
+  `price` decimal(6,2) unsigned NOT NULL,
+  `created_date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `reservation` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `number_of_guests` int(10) unsigned NOT NULL,
+  `meal_id` int(10) unsigned NOT NULL,
+  `created_date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_mealinreservation` FOREIGN KEY (`meal_id`) REFERENCES `meal` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `review` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NULL DEFAULT NULL,
+  `meal_id` int(10) unsigned NOT NULL,
+  `stars` int(10) unsigned NULL DEFAULT NULL,
+  `created_date` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_mealinreview` FOREIGN KEY (`meal_id`) REFERENCES `meal` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
