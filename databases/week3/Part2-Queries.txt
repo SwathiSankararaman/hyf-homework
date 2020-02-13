@@ -83,7 +83,7 @@ WHERE id = 4;
 
 Review:
 1. SELECT * FROM review;
-2. insert into review (title, description, meal_id, stars, created_date) values ('Too spicy', 4, 1,'2020-01-28 00:00:00');
+2. insert into review (title, description, meal_id, stars, created_date) values ('Too spicy', '', 4, 1,'2020-01-28 00:00:00');
 3. SELECT * FROM review WHERE id = 1;
 4. UPDATE review 
 SET  description = 'Very good balanced curry'
@@ -96,9 +96,11 @@ ADDITIONAL QUERIES
 SELECT * FROM meal WHERE price < 90
 
 2. Get meals that still has available reservations
-SELECT meal.* FROM meal
-INNER JOIN reservation ON meal.id = reservation.meal_id
-WHERE reservation.number_of_guests < meal.max_reservations;
+SELECT meal.*,
+SUM(reservation.number_of_guests) AS number_of_reservations, meal.max_reservations - SUM(reservation.number_of_guests) AS vacancies
+FROM meal INNER JOIN reservation ON meal.id = reservation.meal_id
+WHERE reservation.number_of_guests < meal.max_reservations
+GROUP BY meal.id;
 
 3. Get meals that partially match a title. Rød grød med will match the meal with the title Rød grød med fløde
 SELECT * FROM meal WHERE title LIKE '%butter%'
