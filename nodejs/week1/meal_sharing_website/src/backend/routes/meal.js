@@ -10,7 +10,8 @@ const mealTest = function (request, response) {
     });
 
     //Finds a random meals inside mealsInReview
-    const randomMeal = mealsInReview[Math.floor(Math.random() * mealsInReview.length)];
+    let randomIndex = Math.floor(Math.random() * mealsInReview.length);
+    const randomMeal = mealsInReview[randomIndex];
 
     response.json(randomMeal);
 }

@@ -2,7 +2,8 @@ const jsonReservationData = require("../data/reservations.json");
 
 const reservationTest = function (request, response) {
 
-    const randomReservation = jsonReservationData[Math.floor(Math.random() * jsonReservationData.length)];
+    let randomIndex = Math.floor(Math.random() * jsonReservationData.length);
+    const randomReservation = jsonReservationData[randomIndex];
 
     response.json(randomReservation);
 }
