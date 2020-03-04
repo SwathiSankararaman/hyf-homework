@@ -43,7 +43,7 @@ const queryEndpoint = function (request, response) {
         if (!moment(dateInString, 'YYYY-MM-DD', true).isValid()) {
             response.send('Date should always be a valid date');
         } else {
-            const filteredDate = jsonMealsData.filter(item => parseInt(item.createdAt) > parseInt(dateInString));
+            const filteredDate = jsonMealsData.filter(item => new Date(dateInString) < new Date(item.createdAt));
             processArrayLength(filteredDate, response);
         }
 
