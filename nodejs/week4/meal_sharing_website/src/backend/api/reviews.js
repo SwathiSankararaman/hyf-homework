@@ -37,14 +37,14 @@ const reviewsFunctionQuery = function (request, response) {
 const reviewsFunctionPost = function (request, response) {
   //const guestcount = request.body.guestcount;
   //const mealid = request.body.mealid;
-  const { title, mealid } = request.body;
+  const { title, meal_id } = request.body;
   const data = {
     title: title,
-    meal_id: mealid
+    meal_id: meal_id
   }
   console.log(data);
 
-  if (!title || !mealid) {
+  if (!title || !meal_id) {
     return response.send('Either title or mealid is required');
   }
   pool.query('INSERT INTO review SET ?', data, function (error, results) {

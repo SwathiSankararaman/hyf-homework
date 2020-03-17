@@ -37,37 +37,53 @@ const reservationsFunctionQuery = function (request, response) {
 const reservationsFunctionPost = function (request, response) {
   //const guestcount = request.body.guestcount;
   //const mealid = request.body.mealid;
-  const { guestcount, mealid } = request.body;
+  const { number_of_guests, meal_id, name, email, phone } = request.body;
   const data = {
-    number_of_guests: guestcount,
-    meal_id: mealid
+    number_of_guests: number_of_guests,
+    meal_id: meal_id,
+    name: name,
+    email: email,
+    phone: phone
   }
+  const idString = meal_id.toString();
+  console.log(idString);
   console.log(data);
+  console.log(number_of_guests);
 
-  if (!guestcount || !mealid) {
-    return response.send('Either no of guests or mealid is required');
+  if (!number_of_guests || !meal_id || !name || !email) {
+    return response.json({ 'Message': 'Please enter the required fields' });
+  } else {
+    pool.query('SELECT max_reservations FROM meal where id = ?', idString, function (error, results) {
+      if (error) {
+        console.error(`error ${error}`);
+      } else if (results[0].max_reservations > number_of_guests) {
+        //Insert
+        pool.query('INSERT INTO reservation SET ?', data, function (error, results) {
+          if (error) {
+            console.error(`error ${error}`);
+          }
+          // response.json(results);
+          return response.json({ id: results.insertId });
+        })
+      } else {
+        return response.json({ 'Message': 'Cannot reserve the meal as there are no enough availability' });
+      }
+    })
   }
-  pool.query('INSERT INTO reservation SET ?', data, function (error, results) {
-    if (error) {
-      console.error(`error ${error}`);
-    }
-    // response.json(results);
-    return response.json({ id: results.insertId });
-  });
-};
+}
 
 // This function is for PUT operation
 const reservationsFunctionPut = function (request, response) {
   const idString = request.params.id;
   const id = parseInt(idString);
-  const { guestcount, mealid } = request.body;
+  const { guestcount, mealid, name, email, phone } = request.body;
 
-  if (!guestcount || !mealid) {
-    return response.send('Either no of guests or mealid is required');
+  if (!guestcount || !mealid || !name || !email) {
+    return response.send('Please enter the required fields');
   } else if (isNaN(id)) {
     response.send('Id should be an integer');
   } else {
-    pool.query('UPDATE reservation SET number_of_guests = ?, meal_id = ? WHERE id = ?', [guestcount, mealid, id], function (error, results) {
+    pool.query('UPDATE reservation SET number_of_guests = ?, meal_id = ?, name = ?, email = ?, phone = ? WHERE id = ?', [guestcount, mealid, name, email, phone, id], function (error, results) {
       if (error) {
         console.error(`error ${error}`);
       } else if (results.length === 0) {
