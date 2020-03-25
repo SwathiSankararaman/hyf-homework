@@ -1,0 +1,75 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    font-size: 4rem;
+    font-family: cursive;
+    font-weight: bolder;
+    color: rgb(77, 70, 70);
+    text-align: center;
+    margin-top: 10%;
+}
+
+#firstdiv {
+text-align: center;
+}
+
+#myinput {
+    margin-top: 5%;
+    width: 30%;
+    border-color: white;
+    padding: 0.4%;
+
+}
+
+#mybutton, #newbutton {
+    margin-top: 5%;
+    border-radius: 10%;
+    padding: 0.75%;
+    background-color: rgb(69, 212, 157);
+    color: white;
+}
+
+section {
+display: flex;
+margin-top: 10%;
+width: 100%;
+}
+
+.leftsection, 
+.rightsection {
+    position: relative;
+    padding: 20%;
+    flex: 1;
+    border: 1px solid grey;
+}
+
+.leftsection {
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+}
+.rightsection {
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.leftsection > label,
+.rightsection > label {
+    color: grey;
+    font-size: x-small;
+}
+
+#left, #right {
+    left: 0;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
