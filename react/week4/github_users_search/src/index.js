@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import UserList from "./UserList";
+//import App from './App';
 import searchContext from "./context";
 import * as serviceWorker from './serviceWorker';
 
@@ -9,8 +10,17 @@ const root = document.getElementById('root');
 const ContextProvider = searchContext.Provider;
 
 function fetchGithubUsers(query) {
-  const URL = `https://api.github.com/search/users?q=${query}`
-  return fetch(URL).then(response => response.json())
+  if (query !== '') {
+    const URL = `https://api.github.com/search/users?q=${query}`
+    return fetch(URL).then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      } else {
+        throw Error(response.statusText);
+      }
+    })
+  }
+
 }
 
 function Header() {
@@ -21,60 +31,52 @@ function Header() {
   )
 }
 
-class UserList extends React.Component {
-  render() {
-    return (
-      <div>
-        <li>{this.props.user}</li>
-      </div>
-    )
-  }
-}
-
 class Searchbar extends React.Component {
   state = {
     searchTerm: '',
     isLoading: false,
-    usersArray: []
-  }
-
-  fetchUsers() {
-    const query = this.state.searchTerm;
-    console.log(query);
-    fetchGithubUsers(query)
-      .then(data => {
-        const users = data.items.map(user => user.login)
-        console.log(users);
-        this.setState({
-          usersArray: users,
-          isLoading: true
-        })
-      })
+    usersArray: [],
+    errorMessage: null
   }
 
   handleSearchChange = (event) => {
     const searchedValue = event.target.value
     this.setState({
-      searchTerm: searchedValue,
-      isLoading: true
+      searchTerm: searchedValue
     })
-    this.fetchUsers()
+    if (searchedValue !== '') {
+      fetchGithubUsers(searchedValue)
+        .then(data => {
+          const users = data.items.map(user => user.login)
+          console.log(users);
+          this.setState({
+            usersArray: users,
+            isLoading: true
+          })
+        }).catch(error => {
+          this.setState({ errorMessage: error })
+        }).finally(() => this.setState({ isLoading: false }))
+    }
   }
 
   render() {
+    const contextValue = {
+        usersArray: this.state.usersArray
+    }
     return (
+      <ContextProvider value={contextValue}>
       <div>
-        <input type='text' placeholder='Search for user' value={this.state.searchTerm} onChange={this.handleSearchChange} />
-        {this.state.isLoading ? <p>Loading...</p> : this.state.usersArray.length === 0 ? <p>No results</p> :
-          <div>
-            <ul>
-              {this.state.usersArray.map(user => (
-                <UserList user={user}/>
-              ))}
-            </ul>
-          </div>
-        }
+          <input type='text' placeholder='Search for user' value={this.state.searchTerm} onChange={this.handleSearchChange} />
+          {this.state.isLoading ? <p>Loading...</p> : (this.state.usersArray.length === 0 || this.state.searchTerm === '') ? <p>No results</p> :
+            <div className='list-container'>
+              <ul>
+                  <UserList />
+              </ul>
+            </div> 
+          }
+          {(this.state.errorMessage !== null) ? <p>{this.state.errorMessage}</p> : null}
       </div>
+      </ContextProvider>
     )
   }
 }

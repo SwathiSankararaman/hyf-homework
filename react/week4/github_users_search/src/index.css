@@ -16,3 +16,18 @@ code {
   text-align: center;
   margin-top: 10%;
 }
+
+.list {
+  list-style: none;
+}
+
+/* .list-container, .lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+
+.lists {
+  border: 1px solid black;
+} */
