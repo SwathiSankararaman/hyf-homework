@@ -20,7 +20,17 @@ function fetchGithubUsers(query) {
       }
     })
   }
+}
 
+function fetchGithubUsersRepos(login) {
+  const URL = `https://api.github.com/users/${login}/repos`
+  return fetch(URL).then((response) => {
+    if (response.status >= 200 && response.status <= 299) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  })
 }
 
 function Header() {
@@ -36,7 +46,11 @@ class Searchbar extends React.Component {
     searchTerm: '',
     isLoading: false,
     usersArray: [],
-    errorMessage: null
+    reposArray: [],
+    errorMessage: '',
+    isClickedUser: false,
+    isClickedRepos: false,
+    selectedUser: ''
   }
 
   handleSearchChange = (event) => {
@@ -47,35 +61,69 @@ class Searchbar extends React.Component {
     if (searchedValue !== '') {
       fetchGithubUsers(searchedValue)
         .then(data => {
-          const users = data.items.map(user => user.login)
+          console.log(data);
+          const users = data.items.map(user => user)
           console.log(users);
           this.setState({
             usersArray: users,
             isLoading: true
           })
         }).catch(error => {
-          this.setState({ errorMessage: error })
+          console.log(error.message);
+          this.setState({
+            errorMessage: error.message,
+            usersArray: []
+          })
         }).finally(() => this.setState({ isLoading: false }))
     }
   }
 
+  handleClickSearch = (event, loginName) => {
+    event.preventDefault();
+    console.log(loginName);
+    fetchGithubUsersRepos(loginName)
+      .then(data => {
+        const repos = data.map(repo => repo)
+        console.log(repos)
+        this.setState({
+          reposArray: repos,
+          isClickedUser: true,
+          selectedUser: loginName,
+          searchTerm: loginName
+        })
+      })
+  }
+
+  handleClickRepos = (event) => {
+    event.preventDefault();
+    this.setState({
+      isClickedRepos: true
+    })
+  }
+
   render() {
     const contextValue = {
-        usersArray: this.state.usersArray
+      usersArray: this.state.usersArray,
+      isClickedUser: this.state.isClickedUser,
+      isClickedRepos: this.state.isClickedRepos,
+      reposArray: this.state.reposArray,
+      handleClickSearch: this.handleClickSearch,
+      handleClickRepos: this.handleClickRepos,
+      loginName: this.state.selectedUser
     }
     return (
       <ContextProvider value={contextValue}>
-      <div>
+        <div className='list-container'>
           <input type='text' placeholder='Search for user' value={this.state.searchTerm} onChange={this.handleSearchChange} />
           {this.state.isLoading ? <p>Loading...</p> : (this.state.usersArray.length === 0 || this.state.searchTerm === '') ? <p>No results</p> :
-            <div className='list-container'>
+            <div className='list-wrapper'>
               <ul>
-                  <UserList />
+                <UserList />
               </ul>
-            </div> 
+            </div>
           }
-          {(this.state.errorMessage !== null) ? <p>{this.state.errorMessage}</p> : null}
-      </div>
+          {<h1>{this.state.errorMessage}</h1>}
+        </div>
       </ContextProvider>
     )
   }
