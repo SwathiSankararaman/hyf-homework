@@ -1,5 +1,5 @@
 Potato
 Carrot
-Cauliflower
+Remotely modified Cauliflower
 Mushroom
 Peas
