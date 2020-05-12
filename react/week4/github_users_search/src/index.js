@@ -13,7 +13,7 @@ function fetchGithubUsers(query) {
   if (query !== '') {
     const URL = `https://api.github.com/search/users?q=${query}`
     return fetch(URL).then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
+      if (response.status === 200) {
         return response.json();
       } else {
         throw Error(response.statusText);
