@@ -7,7 +7,6 @@ function UserRepo() {
 
     return (
         <div>
-            {console.log(isClickedRepos)}
             {isClickedRepos ? <h3>Cannot fetch more details</h3> :
                 <div>
                     <h3>Repositories of {loginName}</h3>
