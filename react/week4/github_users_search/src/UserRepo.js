@@ -24,15 +24,3 @@ function UserRepo() {
 }
 
 export default UserRepo;
-
-// {
-//     isClickedRepo ? <h3>Cannot fetch more details</h3> :
-//         <div>
-//             <h3>Repositories of {loginName}</h3>
-//             {reposArray.map((user, index) =>
-//                 <li key={index} className='github_repolist'>
-//                     <a href={user} onClick={() => handleClickRepos()}>{user.name}</a>
-//                 </li>
-//             )}
-//         </div>
-// }
