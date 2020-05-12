@@ -8,7 +8,6 @@ function UserList() {
 
     return (
         <div className='lists'>
-            {console.log(isClickedUser)}
             {isClickedUser ? <UserRepo /> :
                 <div>
                     {usersArray.map(user =>
