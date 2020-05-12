@@ -117,9 +117,7 @@ class Searchbar extends React.Component {
           <input type='text' placeholder='Search for user' value={this.state.searchTerm} onChange={this.handleSearchChange} />
           {this.state.isLoading ? <p>Loading...</p> : (this.state.usersArray.length === 0 || this.state.searchTerm === '') ? <p>No results</p> :
             <div className='list-wrapper'>
-              <ul>
                 <UserList />
-              </ul>
             </div>
           }
           {<h1>{this.state.errorMessage}</h1>}
