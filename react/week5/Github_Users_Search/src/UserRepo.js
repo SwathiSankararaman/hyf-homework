@@ -1,11 +1,15 @@
-import React from 'react';
- import searchContext from "./context";
+import React, { useEffect } from 'react';
+ import SearchContext from "./context";
  import './index.css';
  import { Link } from 'react-router-dom';
 
 
  function UserRepo() {
-     const { reposArray, loginName, handleClickRepos, isClickedRepos } = React.useContext(searchContext);
+     const { reposArray, loginName, handleClickRepos, isClickedRepos, fetchUserRepos } = React.useContext(SearchContext);
+
+     useEffect( ()=>{
+      return fetchUserRepos(loginName)
+   }, []);
 
      return (
          <div>

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import './index.css';
 import UserList from "./UserList";
-import searchContext from "./context";
+import SearchContext from "./context";
 import * as serviceWorker from './serviceWorker';
 import UserRepo from './UserRepo';
 
 
 const root = document.getElementById('root');
-const ContextProvider = searchContext.Provider;
+const ContextProvider = SearchContext.Provider;
 
 function fetchGithubUsers(query) {
   if (query !== '') {
@@ -120,29 +120,33 @@ class Searchbar extends React.Component {
   }
 
   render() {
-    const contextValue = {
-      usersArray: this.state.usersArray,
-      isClickedUser: this.state.isClickedUser,
-      isClickedRepos: this.state.isClickedRepos,
-      reposArray: this.state.reposArray,
-      handleClickSearch: this.handleClickSearch,
-      handleClickRepos: this.handleClickRepos,
-      loginName: this.state.selectedUser
-    }
+    // const contextValue = {
+    //   usersArray: this.state.usersArray,
+    //   isClickedUser: this.state.isClickedUser,
+    //   isClickedRepos: this.state.isClickedRepos,
+    //   reposArray: this.state.reposArray,
+    //   handleClickSearch: this.handleClickSearch,
+    //   handleClickRepos: this.handleClickRepos,
+    //   loginName: this.state.selectedUser
+    // }
     return (
-      <ContextProvider value={contextValue}>
-        <div>
-          <div className='list-container'>
-            <input type='text' placeholder='Search for user' value={this.state.searchTerm} onChange={this.handleSearchChange} />
-            {this.state.isLoading ? <p>Loading...</p> : (this.state.usersArray.length === 0 || this.state.searchTerm === '') ? <p>No results</p> :
-              <div className='list-wrapper'>
-                  <UserList />
+      <SearchContext.Consumer>
+        {context => {
+          return (
+            <div>
+              <div className='list-container'>
+                <input type='text' placeholder='Search for user' defaultValue={this.state.searchTerm} onChange={context.handleSearchChange} />
+                {this.state.isLoading ? <p>Loading...</p> : (context.usersArray.length === 0) ? <p>No results</p> :
+                  <div className='list-wrapper'>
+                      <UserList />
+                  </div>
+                }
               </div>
-            }
-          </div>
-          {<h1>{this.state.errorMessage}</h1>}
-        </div>
-      </ContextProvider>
+              {<h1>{this.state.errorMessage}</h1>}
+            </div>
+          )
+        }}
+      </SearchContext.Consumer>
     )
   }
 }
@@ -155,25 +159,136 @@ const Home = () => (
 )
 
 
+class App extends React.Component {
+  state = {
+    searchTerm: '',
+    isLoading: false,
+    usersArray: [],
+    reposArray: [],
+    errorMessage: '',
+    isClickedUser: false,
+    isClickedRepos: false,
+    selectedUser: ''
+  }
 
-function App() {
-  return (
-    <BrowserRouter>
-        <div className='container'>
-        <Switch>
-          <Route path='/' exact>
-            <Home />
-          </Route>
-          <Route path='/about' exact>
-            <About />
-          </Route>
-           <Route path='/profile' component={UserRepo} exact>
-          </Route> 
-        </Switch>
-        </div>
-    </BrowserRouter>
-  )
+  handleSearchChange = (event) => {
+    console.log("search");
+    const searchedValue = event.target.value
+    this.setState({
+      searchTerm: searchedValue
+    })
+    if (searchedValue !== '') {
+      fetchGithubUsers(searchedValue)
+        .then(data => {
+          console.log(data);
+          const users = data.items.map(user => user)
+          console.log(users);
+          this.setState({
+            usersArray: users,
+            isLoading: true
+          })
+        }).catch(error => {
+          console.log(error.message);
+          this.setState({
+            errorMessage: error.message,
+            usersArray: []
+          })
+        }).finally(() => this.setState({ isLoading: false }))
+    }
+  }
+
+  handleClickSearch = (e, loginName) => {
+    console.log(loginName);
+    // e.preventDefault();
+    this.setState({ selectedUser: loginName });
+    // console.log(this.state);
+  }
+
+  fetchUserRepos = (loginName) => {
+    fetchGithubUsersRepos(loginName)
+      .then(data => {
+        const repos = data.map(repo => repo)
+        console.log(repos)
+        this.setState({
+          reposArray: repos,
+          isClickedUser: true,
+          selectedUser: loginName,
+          searchTerm: loginName
+        })
+      })
+  }
+
+  handleClickRepos = (event) => {
+    event.preventDefault();
+    this.setState({
+      isClickedRepos: true
+    })
+  }
+
+  render() {
+    console.log(this.state.selectedUser);
+    const contextValue = {
+      usersArray: this.state.usersArray,
+      isClickedUser: this.state.isClickedUser,
+      isClickedRepos: this.state.isClickedRepos,
+      reposArray: this.state?.reposArray || [],
+      handleClickSearch: this.handleClickSearch,
+      fetchUserRepos: this.fetchUserRepos,
+      handleClickRepos: this.handleClickRepos,
+      handleSearchChange: this.handleSearchChange,
+      loginName: this.state.selectedUser
+    }
+
+    console.log(contextValue);
+    return (
+      <BrowserRouter>
+            <div className='container'>
+            <Switch>
+              <Route path='/' exact>
+              <SearchContext.Provider value={contextValue}>
+
+                <Home />
+                </SearchContext.Provider>
+
+              </Route>
+              <Route path='/about' exact>
+              <SearchContext.Provider value={contextValue}>
+
+                <About />
+                </SearchContext.Provider>
+
+              </Route>
+
+               <Route path='/profile/:login' exact>
+                 <SearchContext.Provider value={contextValue}>
+                   <UserRepo />
+                 </SearchContext.Provider>
+              </Route>
+            </Switch>
+            </div>
+      </BrowserRouter>
+    )
+  }
 }
+
+// function App() {
+//   return (
+//     <BrowserRouter>
+//           <div className='container'>
+//           <Switch>
+//             <Route path='/' exact>
+//               <Home />
+//             </Route>
+//             <Route path='/about' exact>
+//               <About />
+//             </Route>
+//              <Route path='/profile/:id' component={UserRepo} exact>
+//             </Route>
+//           </Switch>
+//           </div>
+//     </BrowserRouter>
+//   )
+// }
 
 ReactDOM.render(<App />, root);
 
