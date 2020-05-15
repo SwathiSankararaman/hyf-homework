@@ -21,7 +21,8 @@ code {
   list-style: none;
 }
 
-.lists a {
+.lists a, .github_repolist a {
   text-decoration: none;
   color: black;
 }
+
