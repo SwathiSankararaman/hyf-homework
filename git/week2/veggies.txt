@@ -1,5 +1,10 @@
 Potato
 Carrot
+locally modified Cauliflower
+Mushroom
+Peas
+Baby corn 
+Tomato
 Remotely modified Cauliflower
 Mushroom
 Peas
