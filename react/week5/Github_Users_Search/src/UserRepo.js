@@ -9,7 +9,7 @@ import SearchContext from "./context";
 
      useEffect(() => {
          fetchUserRepos(loginName)
-     }, [fetchUserRepos, loginName]);
+     }, []);
      return (
                  <div>
              <h3>Repositories of {loginName}</h3>
